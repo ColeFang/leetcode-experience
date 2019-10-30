@@ -26,14 +26,15 @@ def rank(mat):
         start_list.append(1/l)
     while(True):
         new_list=[]
-        for j in range(l):
+        for i in range(l):
             new=0
-            for i in range(l):
-                new+=start_list[j]*mat[i][j]
+            for j in range(l):
+                new+=start_list[i]*mat[i][j]
             new_list.append(new)
-        start_list=new_list
-        if max(new_list)-min(new_list)<=0.1 or min(new_list)<=0.1:
+        if new_list[0]-start_list[0]<=0.1 or min(new_list)<=0.1:
+            start_list = new_list
             break
+        start_list=new_list
     return start_list
 def print_matrix(mat):
     for i in range(len(mat)):
