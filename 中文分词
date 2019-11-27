@@ -1,0 +1,53 @@
+file=open("D:/words.dict",encoding='GB18030')
+LIST=[]
+for i in range(108783):
+    m = file.readline()
+    k=m.find(" ")+1
+    m = m[k:]
+    k=m.find(" ")
+    m= m[:k]
+    LIST.append(m)
+print(LIST)
+
+def foradd(s):
+    maxlen=int(input("please enter the maxlen"))
+    a =''
+    while s!='':
+        if len(s)<=maxlen:
+            temp=s
+        else:
+            temp=s[0:maxlen]
+        while len(temp)!=1:
+            if temp in LIST:
+                a=a+temp+'/'
+                break
+            temp=temp[:-1]
+        if len(temp)==1:
+            a=a + temp + '/'
+        s=s[len(temp):]
+    return a
+def backadd(s):
+    maxlen=int(input("please enter the maxlen"))
+    a =[]
+    while s!='':
+        if len(s)<=maxlen:
+            temp=s
+        else:
+            temp=s[-maxlen:]
+        while len(temp)!=1:
+            if temp in LIST:
+                a.append(temp)
+                break
+            temp=temp[1:]
+        if len(temp)==1:
+            a.append(temp)
+        s=s[:-len(temp)]
+    out=''
+    for i in range(len(a)):
+        out=out+a[-i-1] +"/"
+    return out
+str=input("please enter your own Chinese string")
+print("after the forwardmaxlength")
+print(foradd(str))
+print("after the backwardmaxlength")
+print(backadd(str))
